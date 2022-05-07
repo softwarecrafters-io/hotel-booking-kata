@@ -18,6 +18,6 @@ export class CompanyService {
 
 	deleteEmployee(employeeId: Id) {
 		this.companyRepository.deleteEmployee(employeeId);
-		this.policyRepository.deletePolicyForEmployee(employeeId);
+		this.policyRepository.deleteEmployeePolicy(employeeId);
 	}
 }

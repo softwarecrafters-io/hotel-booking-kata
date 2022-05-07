@@ -2,7 +2,7 @@ import { Hotel, Id, Room, RoomType } from '../models';
 import { Maybe, Nothing } from 'monet';
 
 export class HotelRepository {
-	constructor(private hotels: Hotel[]) {}
+	constructor(private hotels: Hotel[] = []) {}
 
 	createHotel(hotelId: Id, hotelName: string) {
 		const hotel = Hotel.create(hotelId, hotelName);

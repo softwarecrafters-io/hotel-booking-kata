@@ -33,7 +33,7 @@ describe('The company service', () => {
 
 	it('allows to delete an employee and his policies for a given identifier', () => {
 		const companyRepositorySpy = jest.spyOn(companyRepository, 'deleteEmployee');
-		const policiesRepositorySpy = jest.spyOn(policyRepository, 'deletePolicyForEmployee');
+		const policiesRepositorySpy = jest.spyOn(policyRepository, 'deleteEmployeePolicy');
 		const employeeId = Id.generate();
 
 		companyService.deleteEmployee(employeeId);

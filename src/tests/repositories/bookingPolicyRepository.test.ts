@@ -80,4 +80,41 @@ describe('The booking policy repository', () => {
 
 		expect(actualPolicy.just()).toEqual(expectedPolicy);
 	});
+
+	it('Updates an existing company policy', () => {
+		const policyId = Id.generate();
+		const allowedRoomTypes = [RoomType.Standard];
+		const previousPolicy = new CompanyPolicy(policyId, allowedRoomTypes);
+		const expectedPolicy = new CompanyPolicy(policyId, [RoomType.Standard, RoomType.JuniorSuite]);
+		const bookingPolicyRepository = new BookingPolicyRepository([], [previousPolicy]);
+
+		bookingPolicyRepository.createOrUpdateCompanyPolicy(expectedPolicy.companyId, expectedPolicy.getAllowedRoomTypes());
+		const actualPolicy = bookingPolicyRepository.findCompanyPolicyBy(policyId);
+
+		expect(actualPolicy.just()).toEqual(expectedPolicy);
+	});
+
+	it('Removes an existing employee policy', () => {
+		const policyId = Id.generate();
+		const allowedRoomTypes = [RoomType.Standard];
+		const previousPolicy = new EmployeePolicy(policyId, allowedRoomTypes);
+		const bookingPolicyRepository = new BookingPolicyRepository([previousPolicy]);
+
+		bookingPolicyRepository.deleteEmployeePolicy(policyId);
+		const actualPolicy = bookingPolicyRepository.findEmployeePolicyBy(policyId);
+
+		expect(actualPolicy).toEqual(Nothing());
+	});
+
+	it('Removes an existing company policy', () => {
+		const policyId = Id.generate();
+		const allowedRoomTypes = [RoomType.Standard];
+		const previousPolicy = new CompanyPolicy(policyId, allowedRoomTypes);
+		const bookingPolicyRepository = new BookingPolicyRepository([], [previousPolicy]);
+
+		bookingPolicyRepository.deleteCompanyPolicy(policyId);
+		const actualPolicy = bookingPolicyRepository.findCompanyPolicyBy(policyId);
+
+		expect(actualPolicy).toEqual(Nothing());
+	});
 });
