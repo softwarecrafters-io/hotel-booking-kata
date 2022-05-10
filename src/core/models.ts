@@ -20,8 +20,16 @@ export class Hotel {
 		return new Hotel(id, name);
 	}
 
+	hasRoomType(roomType: RoomType) {
+		return this.rooms.map((r) => r.roomType).includes(roomType);
+	}
+
 	getRooms() {
 		return this.rooms;
+	}
+
+	getRoomsByType(type: RoomType) {
+		return this.getRooms().filter((r) => r.roomType === type);
 	}
 
 	addOrUpdateRoom(room: Room) {
@@ -73,5 +81,45 @@ export class CompanyPolicy {
 
 	getAllowedRoomTypes() {
 		return this.allowedRoomTypes;
+	}
+}
+
+export class Booking {
+	constructor(
+		readonly id: Id,
+		readonly employeeId: Id,
+		readonly hotelId: Id,
+		readonly roomType: RoomType,
+		readonly checkIn: Date,
+		readonly checkOut: Date
+	) {}
+
+	static create(bookingProperties: {
+		id: Id;
+		employeeId: Id;
+		hotelId: Id;
+		roomType: RoomType;
+		checkIn: Date;
+		checkOut: Date;
+	}) {
+		this.checkIfAtLeastOneDayBetweenDates(bookingProperties.checkIn, bookingProperties.checkOut);
+		return new Booking(
+			bookingProperties.id,
+			bookingProperties.employeeId,
+			bookingProperties.hotelId,
+			bookingProperties.roomType,
+			bookingProperties.checkIn,
+			bookingProperties.checkOut
+		);
+	}
+
+	static checkIfAtLeastOneDayBetweenDates(checkIn: Date, checkOut: Date) {
+		const difference = checkOut.getTime() - checkIn.getTime();
+		const millisecondsPerDay = 1000 * 3600 * 24;
+		const differenceInDays = Math.ceil(difference / millisecondsPerDay);
+		const areNotValidDates = checkOut < checkIn || differenceInDays < 1;
+		if (areNotValidDates) {
+			throw new Error('Check-out has to be at least one day after check-in');
+		}
 	}
 }
