@@ -1,3 +1,3 @@
-# Hotel Booking Kata outside-in TDD
-Learn and practice outside-in TDD
+# Hotel Booking Kata TDD
+Learn and practice TDD
 

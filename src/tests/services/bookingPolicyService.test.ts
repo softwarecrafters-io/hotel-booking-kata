@@ -1,11 +1,11 @@
 import { CompanyPolicy, Employee, EmployeePolicy, Id, RoomType } from '../../core/models';
-import { BookingPolicyRepository } from '../../core/repositories/bookingPolicyRepository';
+import { PolicyRepository } from '../../core/repositories/policyRepository';
 import { Maybe } from 'monet';
 import { CompanyRepository } from '../../core/repositories/companyRepository';
 import { BookingPolicyService } from '../../core/services/bookingPolicyService';
 
 describe('The Booking Policy Service', () => {
-	const bookingPolicyRepository = new BookingPolicyRepository();
+	const bookingPolicyRepository = new PolicyRepository();
 	const companyRepository = new CompanyRepository();
 	const bookingPolicyService = new BookingPolicyService(bookingPolicyRepository, companyRepository);
 

@@ -1,4 +1,4 @@
-import { BookingPolicyRepository } from '../../core/repositories/bookingPolicyRepository';
+import { PolicyRepository } from '../../core/repositories/policyRepository';
 import { CompanyPolicy, EmployeePolicy, Id, RoomType } from '../../core/models';
 import { Nothing } from 'monet';
 
@@ -6,7 +6,7 @@ describe('The booking policy repository', () => {
 	it('Finds employee policy by identifier', () => {
 		const policyId = Id.generate();
 		const expectedPolicy = new EmployeePolicy(policyId, [RoomType.Standard]);
-		const bookingPolicyRepository = new BookingPolicyRepository([expectedPolicy]);
+		const bookingPolicyRepository = new PolicyRepository([expectedPolicy]);
 
 		const actualPolicy = bookingPolicyRepository.findEmployeePolicyBy(policyId);
 
@@ -15,7 +15,7 @@ describe('The booking policy repository', () => {
 
 	it('Finds nothing when employee policy does not exists', () => {
 		const policyId = Id.generate();
-		const bookingPolicyRepository = new BookingPolicyRepository();
+		const bookingPolicyRepository = new PolicyRepository();
 
 		const actualPolicy = bookingPolicyRepository.findEmployeePolicyBy(policyId);
 
@@ -25,7 +25,7 @@ describe('The booking policy repository', () => {
 	it('Finds company policy by identifier', () => {
 		const companyId = Id.generate();
 		const companyPolicy = new CompanyPolicy(companyId, [RoomType.Standard]);
-		const bookingPolicyRepository = new BookingPolicyRepository([], [companyPolicy]);
+		const bookingPolicyRepository = new PolicyRepository([], [companyPolicy]);
 
 		const actualPolicy = bookingPolicyRepository.findCompanyPolicyBy(companyId);
 
@@ -34,7 +34,7 @@ describe('The booking policy repository', () => {
 
 	it('Finds nothing when company policy does not exists', () => {
 		const policyId = Id.generate();
-		const bookingPolicyRepository = new BookingPolicyRepository();
+		const bookingPolicyRepository = new PolicyRepository();
 
 		const actualPolicy = bookingPolicyRepository.findCompanyPolicyBy(policyId);
 
@@ -45,7 +45,7 @@ describe('The booking policy repository', () => {
 		const policyId = Id.generate();
 		const allowedRoomTypes = [RoomType.Standard];
 		const expectedPolicy = new EmployeePolicy(policyId, allowedRoomTypes);
-		const bookingPolicyRepository = new BookingPolicyRepository();
+		const bookingPolicyRepository = new PolicyRepository();
 
 		bookingPolicyRepository.createOrUpdateEmployeePolicy(policyId, allowedRoomTypes);
 		const actualPolicy = bookingPolicyRepository.findEmployeePolicyBy(policyId);
@@ -57,7 +57,7 @@ describe('The booking policy repository', () => {
 		const companyId = Id.generate();
 		const allowedRoomTypes = [RoomType.Standard];
 		const expectedPolicy = new CompanyPolicy(companyId, allowedRoomTypes);
-		const bookingPolicyRepository = new BookingPolicyRepository();
+		const bookingPolicyRepository = new PolicyRepository();
 
 		bookingPolicyRepository.createOrUpdateCompanyPolicy(companyId, allowedRoomTypes);
 		const actualPolicy = bookingPolicyRepository.findCompanyPolicyBy(companyId);
@@ -70,7 +70,7 @@ describe('The booking policy repository', () => {
 		const allowedRoomTypes = [RoomType.Standard];
 		const previousPolicy = new EmployeePolicy(policyId, allowedRoomTypes);
 		const expectedPolicy = new EmployeePolicy(policyId, [RoomType.Standard, RoomType.JuniorSuite]);
-		const bookingPolicyRepository = new BookingPolicyRepository([previousPolicy]);
+		const bookingPolicyRepository = new PolicyRepository([previousPolicy]);
 
 		bookingPolicyRepository.createOrUpdateEmployeePolicy(
 			expectedPolicy.employeeId,
@@ -86,7 +86,7 @@ describe('The booking policy repository', () => {
 		const allowedRoomTypes = [RoomType.Standard];
 		const previousPolicy = new CompanyPolicy(policyId, allowedRoomTypes);
 		const expectedPolicy = new CompanyPolicy(policyId, [RoomType.Standard, RoomType.JuniorSuite]);
-		const bookingPolicyRepository = new BookingPolicyRepository([], [previousPolicy]);
+		const bookingPolicyRepository = new PolicyRepository([], [previousPolicy]);
 
 		bookingPolicyRepository.createOrUpdateCompanyPolicy(expectedPolicy.companyId, expectedPolicy.getAllowedRoomTypes());
 		const actualPolicy = bookingPolicyRepository.findCompanyPolicyBy(policyId);
@@ -98,7 +98,7 @@ describe('The booking policy repository', () => {
 		const policyId = Id.generate();
 		const allowedRoomTypes = [RoomType.Standard];
 		const previousPolicy = new EmployeePolicy(policyId, allowedRoomTypes);
-		const bookingPolicyRepository = new BookingPolicyRepository([previousPolicy]);
+		const bookingPolicyRepository = new PolicyRepository([previousPolicy]);
 
 		bookingPolicyRepository.deleteEmployeePolicy(policyId);
 		const actualPolicy = bookingPolicyRepository.findEmployeePolicyBy(policyId);
@@ -110,7 +110,7 @@ describe('The booking policy repository', () => {
 		const policyId = Id.generate();
 		const allowedRoomTypes = [RoomType.Standard];
 		const previousPolicy = new CompanyPolicy(policyId, allowedRoomTypes);
-		const bookingPolicyRepository = new BookingPolicyRepository([], [previousPolicy]);
+		const bookingPolicyRepository = new PolicyRepository([], [previousPolicy]);
 
 		bookingPolicyRepository.deleteCompanyPolicy(policyId);
 		const actualPolicy = bookingPolicyRepository.findCompanyPolicyBy(policyId);

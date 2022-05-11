@@ -1,16 +1,16 @@
 import { HotelService } from '../../core/services/hotelService';
 import { BookingPolicyService } from '../../core/services/bookingPolicyService';
 import { HotelRepository } from '../../core/repositories/hotelRepository';
-import { BookingPolicyRepository } from '../../core/repositories/bookingPolicyRepository';
+import { PolicyRepository } from '../../core/repositories/policyRepository';
 import { CompanyRepository } from '../../core/repositories/companyRepository';
 import { Booking, Hotel, Id, Room, RoomType } from '../../core/models';
 import { Maybe } from 'monet';
 import { BookingService } from '../../core/services/bookingService';
-import { BookingRepository } from '../../repositories/bookingRepository';
+import { BookingRepository } from '../../core/repositories/bookingRepository';
 
 describe('generates booking with id and information', () => {
 	const hotelService = new HotelService(new HotelRepository());
-	const policyService = new BookingPolicyService(new BookingPolicyRepository(), new CompanyRepository());
+	const policyService = new BookingPolicyService(new PolicyRepository(), new CompanyRepository());
 	const bookingRepository = new BookingRepository();
 	const bookingService = new BookingService(bookingRepository, hotelService, policyService);
 	const employeeId = Id.generate();

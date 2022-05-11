@@ -2,11 +2,11 @@ import { Employee, Id } from '../../core/models';
 import { Maybe } from 'monet';
 import { CompanyService } from '../../core/services/companyService';
 import { CompanyRepository } from '../../core/repositories/companyRepository';
-import { BookingPolicyRepository } from '../../core/repositories/bookingPolicyRepository';
+import { PolicyRepository } from '../../core/repositories/policyRepository';
 
 describe('The company service', () => {
 	const companyRepository = new CompanyRepository();
-	const policyRepository = new BookingPolicyRepository();
+	const policyRepository = new PolicyRepository();
 	const companyService = new CompanyService(companyRepository, policyRepository);
 
 	it('allows to add a new employee', () => {

@@ -1,7 +1,7 @@
 import { HotelService } from './hotelService';
 import { BookingPolicyService } from './bookingPolicyService';
 import { Booking, Id, RoomType } from '../models';
-import { BookingRepository } from '../../repositories/bookingRepository';
+import { BookingRepository } from '../repositories/bookingRepository';
 
 export class BookingService {
 	constructor(

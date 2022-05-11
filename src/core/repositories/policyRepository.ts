@@ -1,7 +1,7 @@
 import { CompanyPolicy, Employee, EmployeePolicy, Id, RoomType } from '../models';
 import { Maybe, Nothing } from 'monet';
 
-export class BookingPolicyRepository {
+export class PolicyRepository {
 	constructor(private employeePolicies: EmployeePolicy[] = [], private companyPolicies: CompanyPolicy[] = []) {}
 
 	findEmployeePolicyBy(employeeId: Id): Maybe<EmployeePolicy> {

@@ -1,9 +1,9 @@
-import { BookingPolicyRepository } from '../repositories/bookingPolicyRepository';
+import { PolicyRepository } from '../repositories/policyRepository';
 import { CompanyRepository } from '../repositories/companyRepository';
 import { Id, RoomType } from '../models';
 
 export class BookingPolicyService {
-	constructor(private bookingPolicyRepository: BookingPolicyRepository, private companyRepository: CompanyRepository) {}
+	constructor(private bookingPolicyRepository: PolicyRepository, private companyRepository: CompanyRepository) {}
 
 	setCompanyPolicy(companyId: Id, roomTypes: RoomType[]) {
 		this.bookingPolicyRepository.createOrUpdateCompanyPolicy(companyId, roomTypes);

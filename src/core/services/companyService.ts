@@ -1,9 +1,9 @@
 import { Id } from '../models';
 import { CompanyRepository } from '../repositories/companyRepository';
-import { BookingPolicyRepository } from '../repositories/bookingPolicyRepository';
+import { PolicyRepository } from '../repositories/policyRepository';
 
 export class CompanyService {
-	constructor(private companyRepository: CompanyRepository, private policyRepository: BookingPolicyRepository) {}
+	constructor(private companyRepository: CompanyRepository, private policyRepository: PolicyRepository) {}
 
 	addEmployee(companyId: Id, employeeId: Id) {
 		if (this.employeeExists(employeeId)) {
